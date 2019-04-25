@@ -1,7 +1,14 @@
 # The docker workspace for Facenet tensorflow implementation
 This project is largely based on [the origin work](https://github.com/davidsandberg/facenet)
 
-##Steps to re-produce
+To get started, clone this repository:
+```bash
+git clone https://github.com/SeanSyue/Facenet-docker.git
+cd Facenet-docker
+git submodule update --init 
+```
+
+## Steps to re-produce
 
 ### Pre-built docker image
 A pre-built image is available. You can pull the image by:
@@ -30,7 +37,7 @@ By doing so, you can directy run the evaluation command metioned in [here](https
 3. Build the `docker` image and run the `docker` container. Make sure you have [`nvidia-docker`](https://github.com/NVIDIA/nvidia-docker) installed: 
    ```bash
    docker build --rm -t facenet:latest .
-   docker run --runtime=nvidia -it -v $pwd/datasets/lfw:/root/datasets/lfw --name facenet facenet:latest
+   docker run --runtime=nvidia -it -v $pwd/datasets/lfw:/root/datasets/lfw --name facenet sean962081468/facenet:latest
    ```
 
    This will spawn a docker container environent for you. Before continue the following steps, make sure image data and model are appear in `~/datasets/lfw/` and `~/models/facenet/` folders. If not, type `exit` inside the `docker` container and copy them from your host machine, then restart and attach the container:
@@ -40,7 +47,5 @@ By doing so, you can directy run the evaluation command metioned in [here](https
    docker restart facenet
    docker attach facenet
    ```
-
-   
 
 4. For the following step, follow [this](https://github.com/davidsandberg/facenet/wiki/Validate-on-lfw#4-align-the-lfw-dataset) and [this](https://github.com/davidsandberg/facenet/wiki/Validate-on-lfw#6-run-the-test) from the origin repository (**NOTE:** use `python3` instead of `python` in the `docker` container environment). 
